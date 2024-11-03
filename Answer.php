@@ -58,25 +58,28 @@ $start_time = isset($_POST['start_time']) ? intval($_POST['start_time']) : time(
 
 // Define the time limit
 $time_limit = 20; // 20 seconds
+$values = [200, 400, 600, 800, 1000]; // Assuming these values are in order with the questions
 
 // Check if the time limit has been exceeded
 if (time() - $start_time > $time_limit) {
-    // Time is up, do not update score
+    // Time is up, subtract the score value
+    $scoreValue = $values[$index]; // Get the value for the current question
+    $_SESSION['score'] -= $scoreValue; // Subtract the value from the score
     $_SESSION['message'] = "Time's up! You didn't answer in time.";
 } else {
     // Normal answer checking logic
-    $values = [200, 400, 600, 800, 1000];
     $scoreValue = $values[$index];
     $correctAnswer = $questions[$category][$index]['answer'];
     $userAnswer = isset($_POST['user_answer']) ? $_POST['user_answer'] : '';
 
-    // Update the score
+    // Update the score based on user answer
     if ($userAnswer === $correctAnswer) {
         $_SESSION['score'] += $scoreValue; // Correct answer
     } else {
         $_SESSION['score'] -= $scoreValue; // Incorrect answer
     }
 }
+
 
 // Mark the question as answered
 $questionKey = "$category-$index";
