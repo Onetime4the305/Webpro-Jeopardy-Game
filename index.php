@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+// Initialize score and answered questions if they don't exist
+if (!isset($_SESSION['score'])) {
+    $_SESSION['score'] = 0;
+}
+if (!isset($_SESSION['answered'])) {
+    $_SESSION['answered'] = []; // Track answered questions
+}
+
 // Sample questions and answers organized by category
 $questions = [
     'Science' => [
@@ -52,38 +60,63 @@ $questions = [
     ]
 ];
 
-$category = isset($_POST['category']) ? $_POST['category'] : '';
-$index = isset($_POST['index']) ? intval($_POST['index']) : 0;
-$start_time = isset($_POST['start_time']) ? intval($_POST['start_time']) : time(); // Get start time
+$categories = array_keys($questions);
+$values = [200, 400, 600, 800, 1000];
+?>
 
-// Define the time limit
-$time_limit = 20; // 20 seconds
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Jeopardy Game</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Jeopardy Game</h1>
+        <div class="score">Score: <?php echo $_SESSION['score']; ?></div>
+        <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert"><?php echo $_SESSION['message']; ?></div>
+            <?php unset($_SESSION['message']); ?>
+        <?php endif; ?>
 
-// Check if the time limit has been exceeded
-if (time() - $start_time > $time_limit) {
-    // Time is up, do not update score
-    $_SESSION['message'] = "Time's up! You didn't answer in time.";
-} else {
-    // Normal answer checking logic
-    $values = [200, 400, 600, 800, 1000];
-    $scoreValue = $values[$index];
-    $correctAnswer = $questions[$category][$index]['answer'];
-    $userAnswer = isset($_POST['user_answer']) ? $_POST['user_answer'] : '';
+        <div class="grid">
+            <!-- Category Row -->
+            <div class="grid-row">
+                <?php foreach ($categories as $category): ?>
+                    <div class="grid-item header"><?php echo htmlspecialchars($category); ?></div>
+                <?php endforeach; ?>
+            </div>
 
-    // Update the score
-    if ($userAnswer === $correctAnswer) {
-        $_SESSION['score'] += $scoreValue; // Correct answer
-    } else {
-        $_SESSION['score'] -= $scoreValue; // Incorrect answer
-    }
-}
+            <!-- Questions Grid -->
+            <?php for ($i = 0; $i < 5; $i++): ?>
+                <div class="grid-row">
+                    <?php foreach ($categories as $category): ?>
+                        <?php 
+                        // Check if the question has been answered
+                        $questionKey = "$category-$i"; // Unique key for each question
+                        ?>
+                        <div class="grid-item">
+                            <?php if (in_array($questionKey, $_SESSION['answered'])): ?>
+                                <span class="answered"><?php echo htmlspecialchars($values[$i]); ?></span>
+                            <?php else: ?>
+                                <a href="question.php?category=<?php echo urlencode($category); ?>&index=<?php echo $i; ?>" class="question-link"><?php echo htmlspecialchars($values[$i]); ?></a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endfor; ?>
+        </div>
 
-// Mark the question as answered
-$questionKey = "$category-$index";
-$_SESSION['answered'][] = $questionKey;
+        <form action="restart.php" method="post" style="margin-top: 20px;">
+            <button type="submit">Restart Game</button>
+        </form>
+    </div>
+</body>
+</html>              
 
-// Redirect back to the main game
-header("Location: index.php");
-exit();
+
+
 
 

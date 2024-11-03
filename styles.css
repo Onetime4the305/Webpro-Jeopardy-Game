@@ -1,0 +1,38 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+}
+
+.grid-row {
+    display: flex; /* Align items in a row */
+}
+
+.grid-item {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    text-align: center;
+    flex: 1; /* Allow items to grow equally */
+}
+
+.header {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+.answered {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.question-link {
+    text-decoration: none;
+    color: black;
+}
