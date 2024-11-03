@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Sample questions and answers organized by category
+// Sample questions and answers (same as before)
 $questions = [
     'Science' => [
          ['question' => 'It is the most common element in the human body...', 'answer' => 'Oxygen', 'options' => ['Calcium', 'Oxygen', 'Hydrogen', 'Carbon']],
@@ -52,38 +52,47 @@ $questions = [
     ]
 ];
 
-$category = isset($_POST['category']) ? $_POST['category'] : '';
-$index = isset($_POST['index']) ? intval($_POST['index']) : 0;
-$start_time = isset($_POST['start_time']) ? intval($_POST['start_time']) : time(); // Get start time
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+$index = isset($_GET['index']) ? intval($_GET['index']) : 0;
 
-// Define the time limit
-$time_limit = 20; // 20 seconds
-
-// Check if the time limit has been exceeded
-if (time() - $start_time > $time_limit) {
-    // Time is up, do not update score
-    $_SESSION['message'] = "Time's up! You didn't answer in time.";
+// Check if the category and index are valid
+if (array_key_exists($category, $questions) && isset($questions[$category][$index])) {
+    $selected_question = $questions[$category][$index];
 } else {
-    // Normal answer checking logic
-    $values = [200, 400, 600, 800, 1000];
-    $scoreValue = $values[$index];
-    $correctAnswer = $questions[$category][$index]['answer'];
-    $userAnswer = isset($_POST['user_answer']) ? $_POST['user_answer'] : '';
-
-    // Update the score
-    if ($userAnswer === $correctAnswer) {
-        $_SESSION['score'] += $scoreValue; // Correct answer
-    } else {
-        $_SESSION['score'] -= $scoreValue; // Incorrect answer
-    }
+    // Handle invalid category/index (optional)
+    die("Invalid question.");
 }
 
-// Mark the question as answered
-$questionKey = "$category-$index";
-$_SESSION['answered'][] = $questionKey;
+?>
 
-// Redirect back to the main game
-header("Location: index.php");
-exit();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Question</title>
+</head>
+<body>
+    <div class="container">
+        <h1><?php echo htmlspecialchars($selected_question['question']); ?></h1>
+        <form action="answer.php" method="post">
+    <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+    <input type="hidden" name="index" value="<?php echo htmlspecialchars($index); ?>">
+    <input type="hidden" name="start_time" value="<?php echo time(); ?>"> <!-- Start time -->
+    <input type="hidden" name="answer" value="<?php echo htmlspecialchars($selected_question['answer']); ?>">
+    <?php foreach ($selected_question['options'] as $option): ?>
+        <div>
+            <label>
+                <input type="radio" name="user_answer" value="<?php echo htmlspecialchars($option); ?>">
+                <?php echo htmlspecialchars($option); ?>
+            </label>
+        </div>
+    <?php endforeach; ?>
+    <button type="submit">Submit Answer</button>
+</form>
 
-
+        <a href="index.php">Back to Game</a>
+    </div>
+</body>
+</html>
