@@ -1,5 +1,13 @@
+body {
+    background-color: #004289;
+}
+
+.score {
+    font-size: 30pt;
+}
+
 .container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
 }
@@ -15,24 +23,59 @@
 
 .grid-item {
     padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+    border: 1px solid #000000;
+    background-color: #004289;
     text-align: center;
     flex: 1; /* Allow items to grow equally */
 }
 
 .header {
-    background-color: #007BFF;
+    background-color: #004289;
     color: white;
+    font-size: 18pt;
     font-weight: bold;
 }
 
 .answered {
     text-decoration: line-through;
     color: gray;
+    font-size: 24pt;
+    font-weight: bold;
 }
 
 .question-link {
     text-decoration: none;
-    color: black;
+    color: rgb(201, 129, 3);
+    font-size: 24pt;
+    font-weight: bold;
 }
+
+button[type="submit"] {
+	background-color: rgb(9, 146, 205);
+    color: white;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+label {
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+.final-jeopardy-button {
+    background-color: #f39c12; /* Yellow background */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.final-jeopardy-button:hover {
+    background-color: #e67e22; /* Darker orange when hovered */
+}
+
