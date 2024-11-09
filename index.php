@@ -51,7 +51,7 @@ $questions = [
          ['question' => 'What is the largest city in the world?', 'answer' => 'Tokyo', 'options' => ['Paris', 'Tokyo', 'New York', 'London']]
     ],
 
-    'Programming' => [
+    'Coding' => [
          ['question' => 'Which of these are a coding language', 'answer' => 'C++', 'options' => ['Nokia', 'C++', 'Plains', 'Google']],
          ['question' => 'What are conditional statements?', 'answer' => 'Programs that only run when certain paremeters are met', 'options' => ['Program that never runs', 'Programs that only run when certain paremeters are met', 'Programs that loop', 'Programs that access different pages']],
          ['question' => 'What process is used to clean up code in a program?', 'answer' => 'debugging', 'options' => ['looping', 'recursion', 'debugging', 'factoring']],
@@ -60,6 +60,16 @@ $questions = [
     ]
 ];
 
+$allAnswered = true;
+foreach ($questions as $category => $categoryQuestions) {  // Correctly loop over the categories
+    foreach ($categoryQuestions as $index => $question) { // Loop through each question in the category
+        $questionKey = "$category-$index";
+        if (!in_array($questionKey, $_SESSION['answered'])) {
+            $allAnswered = false;
+            break 2; // Break both loops if we find an unanswered question
+        }
+    }
+}
 $categories = array_keys($questions);
 $values = [200, 400, 600, 800, 1000];
 ?>
@@ -76,6 +86,13 @@ $values = [200, 400, 600, 800, 1000];
     <div class="container">
         <h1>Jeopardy Game</h1>
         <div class="score">Score: <?php echo $_SESSION['score']; ?></div>
+        <?php if ($allAnswered && $_SESSION['score'] > 0): ?>
+            <form action="final_jeopardy.php" method="get">
+                <button type="submit" class="final-jeopardy-button">Go to Final Jeopardy</button>
+            </form>
+        <?php elseif ($allAnswered && $_SESSION['score'] <= 0): ?>
+            <p>You have no score. Game Over.</p>
+        <?php endif; ?>
         <?php if (isset($_SESSION['message'])): ?>
             <div class="alert"><?php echo $_SESSION['message']; ?></div>
             <?php unset($_SESSION['message']); ?>
