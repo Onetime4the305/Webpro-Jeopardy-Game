@@ -80,6 +80,14 @@ if (array_key_exists($category, $questions) && isset($questions[$category][$inde
     <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
     <input type="hidden" name="index" value="<?php echo htmlspecialchars($index); ?>">
     <input type="hidden" name="start_time" value="<?php echo time(); ?>"> <!-- Start time -->
+    <div class="timer-container">
+                <!--circular timer animation-->
+                    <svg class="countdown-circle" viewBox="0 0 160 160">
+                        <circle cx="80" cy="80" r="75" class="circle-bg"/>
+                        <circle cx="80" cy="80" r="75" class="circle-progress" />
+                    </svg>
+                    <div class="countdown-text">20s</div>
+    </div>
     <input type="hidden" name="answer" value="<?php echo htmlspecialchars($selected_question['answer']); ?>">
     <?php foreach ($selected_question['options'] as $option): ?>
         <div>
@@ -88,6 +96,7 @@ if (array_key_exists($category, $questions) && isset($questions[$category][$inde
                 <?php echo htmlspecialchars($option); ?>
             </label>
         </div>
+
     <?php endforeach; ?>
     <button type="submit">Submit Answer</button>
 </form>

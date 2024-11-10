@@ -71,12 +71,15 @@ if (time() - $start_time > $time_limit) {
     $scoreValue = $values[$index];
     $correctAnswer = $questions[$category][$index]['answer'];
     $userAnswer = isset($_POST['user_answer']) ? $_POST['user_answer'] : '';
+    
 
     // Update the score based on user answer
     if ($userAnswer === $correctAnswer) {
         $_SESSION['score'] += $scoreValue; // Correct answer
+        $_SESSION['message'] = "Correct! you gained $scoreValue points.";
     } else {
         $_SESSION['score'] -= $scoreValue; // Incorrect answer
+        $_SESSION['message']="Incorrect. The correct answer was: $correctAnswer you lost $scoreValue points.";
     }
 }
 
@@ -86,7 +89,7 @@ $questionKey = "$category-$index";
 $_SESSION['answered'][] = $questionKey;
 
 // Redirect back to the main game
-header("Location: index.php");
+header("Location: feedback.php");
 exit();
 
 

@@ -29,7 +29,14 @@ $finalAnswer = 'Computer Science';
         <form action="final_jeopardy_result.php" method="post">
             <label for="wager">Wager (up to your current score): </label>
             <input type="number" id="wager" name="wager" min="0" max="<?php echo $_SESSION['score']; ?>" required>
-
+            <div class="timer-container">
+                <!--circular timer animation-->
+                    <svg class="countdown-circle" viewBox="0 0 160 160">
+                        <circle cx="80" cy="80" r="75" class="circle-bg"/>
+                        <circle cx="80" cy="80" r="75" class="circle-progress" />
+                    </svg>
+                    <div class="countdown-text">20s</div>
+            </div>
             <label for="final_answer">Your Answer: </label>
             <input type="text" id="final_answer" name="final_answer" required>
 
