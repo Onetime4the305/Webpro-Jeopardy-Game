@@ -43,7 +43,7 @@ $questions = [
          ['question' => 'What is the largest city in the world?', 'answer' => 'Tokyo', 'options' => ['Paris', 'Tokyo', 'New York', 'London']]
     ],
 
-    'Programming' => [
+    'Coding' => [
          ['question' => 'Which of these are a coding language', 'answer' => 'C++', 'options' => ['Nokia', 'C++', 'Plains', 'Google']],
          ['question' => 'What are conditional statements?', 'answer' => 'Programs that only run when certain paremeters are met', 'options' => ['Program that never runs', 'Programs that only run when certain paremeters are met', 'Programs that loop', 'Programs that access different pages']],
          ['question' => 'What process is used to clean up code in a program?', 'answer' => 'debugging', 'options' => ['looping', 'recursion', 'debugging', 'factoring']],
@@ -71,12 +71,15 @@ if (time() - $start_time > $time_limit) {
     $scoreValue = $values[$index];
     $correctAnswer = $questions[$category][$index]['answer'];
     $userAnswer = isset($_POST['user_answer']) ? $_POST['user_answer'] : '';
+    
 
     // Update the score based on user answer
     if ($userAnswer === $correctAnswer) {
         $_SESSION['score'] += $scoreValue; // Correct answer
+        $_SESSION['message'] = "Correct! you gained $scoreValue points.";
     } else {
         $_SESSION['score'] -= $scoreValue; // Incorrect answer
+        $_SESSION['message']="Incorrect. The correct answer was: $correctAnswer you lost $scoreValue points.";
     }
 }
 
@@ -86,7 +89,7 @@ $questionKey = "$category-$index";
 $_SESSION['answered'][] = $questionKey;
 
 // Redirect back to the main game
-header("Location: index.php");
+header("Location: feedback.php");
 exit();
 
 

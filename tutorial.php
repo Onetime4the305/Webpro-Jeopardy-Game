@@ -12,7 +12,7 @@
     <div class="container">
         <!--screenshot section-->
             <div class="screenshot"> 
-                <img src="main_page.png" alt="jeopardy game screenshot">
+                <img src="mainpage.png" alt="jeopardy game screenshot">
             </div>
             <!--chatbox section--> 
             <div class="chatbox"> 
@@ -29,7 +29,7 @@
         <!--bottom section with screenshot and timer-->
             <div class="bottom-section">
                 <div class="screenshot-bottom">
-                    <img src="question_screenshot.jpg" alt="Question screenshot">
+                    <img src="question_screenshot.png" alt="Question screenshot" width="350" height="auto">
                 </div>
                 <div class="timer-container">
                 <!--circular timer animation-->
