@@ -21,7 +21,7 @@
                 <p>Final jeopardy is the last round in the jeopardy game where players wager an amount of their current score to answer a final question. their wager is can only go up to their current score. </p>
             </div>
             <footer>
-                <p>Ready to play?<a href="index.php">Return to game</a> and try it out!</p>
+                <p>Ready to play?<a href="index.php"> Play Game</a> and try it out!</p>
             </footer>
     </div>
 </body>
