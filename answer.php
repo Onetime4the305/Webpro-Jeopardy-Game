@@ -43,7 +43,7 @@ $questions = [
          ['question' => 'What is the largest city in the world?', 'answer' => 'Tokyo', 'options' => ['Paris', 'Tokyo', 'New York', 'London']]
     ],
 
-    'Programming' => [
+    'Coding' => [
          ['question' => 'Which of these are a coding language', 'answer' => 'C++', 'options' => ['Nokia', 'C++', 'Plains', 'Google']],
          ['question' => 'What are conditional statements?', 'answer' => 'Programs that only run when certain paremeters are met', 'options' => ['Program that never runs', 'Programs that only run when certain paremeters are met', 'Programs that loop', 'Programs that access different pages']],
          ['question' => 'What process is used to clean up code in a program?', 'answer' => 'debugging', 'options' => ['looping', 'recursion', 'debugging', 'factoring']],
