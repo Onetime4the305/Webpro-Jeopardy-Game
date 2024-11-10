@@ -15,7 +15,9 @@ session_start();
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #f9f9f9;
+            background-image: url('tutorial.jpg');
+            background-size: cover;
+            text-align: center;
             text-align: center;
             padding: 20px;
         }
