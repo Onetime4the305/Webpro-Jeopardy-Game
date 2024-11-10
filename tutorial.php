@@ -15,12 +15,12 @@
                 <img src="mainpage.png" alt="jeopardy game screenshot">
             </div>
             <!--chatbox section--> 
-            <div class="chatbox"> 
+            <div class="chatbox rules-section"> 
                 <h2>Single player jeopardy rules</h2>
                 <p>Welcome to jeopardy! here are the rules for single players.</p>
                 <ul>
                     <li>Select a question by choosing a category and its point value.</li>
-                    <li>you earn point by answering the question correctly. remember the timer is 20 seconds!</li> 
+                    <li>you earn point by answering the question correctly. Remember the timer is 20 seconds!</li> 
                     <li> try to reach the highest score by the end of the game.</li>
                     <li> the final round known as final jeopardy can wager to any amount from zero.</li>
                     <p>what is exactly a final jeopardy?. <a href="tutorial_2.php">Click here to see a visual!</a>
@@ -42,7 +42,7 @@
             </div>
         </div>
     <footer>
-            <p>your points varies if you get the question right or wrong. <a href="index.php">Click here to play the game!</a> </p>
+    <p>your points varies if you get the question right or wrong. <a href="index.php">Click here to play the game!</a> </p>
     </footer>
 </body>
 </html>
