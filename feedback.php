@@ -8,16 +8,14 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Answer feedback</title>
-    <link rell="stylesheet" href="feedback.css">
     <style>
         .message-board{
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-image: url('tutorial.jpg');
+            background-color: #004289;
             background-size: cover;
-            text-align: center;
             text-align: center;
             padding: 20px;
         }
